@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="#F5F5F5">
+    android:background="@color/background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:text="Create an Account"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="#000000"
+            android:textColor="@color/textPrimary"
             android:gravity="center"
             android:layout_marginBottom="24dp" />
 
@@ -34,7 +34,9 @@
             android:background="@android:drawable/edit_text"
             android:padding="12dp"
             android:layout_marginBottom="16dp"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp"
+            android:textColor="@color/textPrimary"
+            android:textColorHint="@color/textHint" />
 
         <!-- Password Input with Toggle -->
         <LinearLayout
@@ -53,14 +55,17 @@
                 android:inputType="textPassword"
                 android:background="@android:drawable/edit_text"
                 android:padding="12dp"
-                android:layout_marginEnd="8dp" />
+                android:layout_marginEnd="8dp"
+                android:textColor="@color/textPrimary"
+                android:textColorHint="@color/textHint" />
 
             <Button
                 android:id="@+id/togglePasswordVisibility"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Show"
-                android:background="@android:drawable/btn_default"
+                android:backgroundTint="@color/primaryButton"
+                android:textColor="@color/buttonText"
                 android:padding="12dp" />
         </LinearLayout>
 
@@ -70,8 +75,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Register"
-            android:backgroundTint="#2196F3"
-            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/primaryButton"
+            android:textColor="@color/buttonText"
             android:layout_marginBottom="16dp"
             android:padding="12dp"
             android:enabled="false" />
