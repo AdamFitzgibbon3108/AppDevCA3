@@ -6,15 +6,38 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/emailView"
+        android:id="@+id/welcomeMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Fetching email..."
-        android:padding="8dp" />
+        android:text="Welcome!"
+        android:padding="8dp"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/manageGoalsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Manage Goals"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/feedbackButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Provide Feedback"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/otherFunctionalityButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Other Functionality"
+        android:layout_marginTop="16dp" />
 
     <Button
         android:id="@+id/logoutButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Logout" />
+        android:text="Logout"
+        android:layout_marginTop="16dp" />
 </LinearLayout>
