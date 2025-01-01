@@ -1,72 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="#F5F5F5"
     android:padding="16dp">
 
+    <!-- Welcome Message -->
+    <TextView
+        android:id="@+id/welcomeMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Welcome to the Security App!"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Section for Manage Goals and Feedback -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center">
-
-        <!-- Welcome Message -->
-        <TextView
-            android:id="@+id/welcomeMessage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Welcome!"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textColor="#000000"
-            android:layout_marginBottom="24dp" />
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_marginBottom="16dp">
 
         <!-- Manage Goals Button -->
         <Button
             android:id="@+id/manageGoalsButton"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Manage Goals"
             android:backgroundTint="#2196F3"
             android:textColor="#FFFFFF"
             android:padding="12dp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginEnd="8dp" />
 
         <!-- Provide Feedback Button -->
         <Button
             android:id="@+id/feedbackButton"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Provide Feedback"
             android:backgroundTint="#4CAF50"
             android:textColor="#FFFFFF"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Other Functionality Button -->
-        <Button
-            android:id="@+id/otherFunctionalityButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Other Functionality"
-            android:backgroundTint="#FFC107"
-            android:textColor="#FFFFFF"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Logout Button -->
-        <Button
-            android:id="@+id/logoutButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Logout"
-            android:backgroundTint="#F44336"
-            android:textColor="#FFFFFF"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp" />
-
+            android:padding="12dp" />
     </LinearLayout>
-</ScrollView>
+
+    <!-- RecyclerView for News -->
+    <TextView
+        android:id="@+id/securityUpdatesTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Latest Security Updates"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="start"
+        android:textColor="#000000"
+        android:layout_marginBottom="8dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/newsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="16dp"
+        android:background="#FFFFFF"
+        android:elevation="4dp"
+        android:padding="8dp" />
+
+    <!-- Logout Button -->
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:backgroundTint="#F44336"
+        android:textColor="#FFFFFF"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp" />
+</LinearLayout>
