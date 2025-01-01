@@ -3,51 +3,68 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp"
+    android:padding="12dp"
     android:background="@android:color/white"
     android:layout_margin="8dp"
-    android:elevation="2dp">
+    android:elevation="4dp"
+    android:clipToPadding="false"
+    android:clipChildren="false">
 
+    <!-- Title -->
     <TextView
         android:id="@+id/goalTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Goal Title"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#212121"
+        android:layout_marginBottom="4dp" />
 
+    <!-- Description -->
     <TextView
         android:id="@+id/goalDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Goal Description"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:textColor="#757575"
+        android:layout_marginBottom="4dp" />
 
+    <!-- Completion Date -->
     <TextView
         android:id="@+id/goalDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Completion Date"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:textColor="#9E9E9E"
+        android:layout_marginBottom="8dp" />
 
+    <!-- Buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="8dp">
+        android:gravity="end">
 
         <Button
             android:id="@+id/editGoalButton"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Edit" />
+            android:text="Edit"
+            android:textAllCaps="false"
+            android:background="@android:color/holo_blue_light"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="8dp" />
 
         <Button
             android:id="@+id/deleteGoalButton"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Delete" />
+            android:text="Delete"
+            android:textAllCaps="false"
+            android:background="@android:color/holo_red_light"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 </LinearLayout>
