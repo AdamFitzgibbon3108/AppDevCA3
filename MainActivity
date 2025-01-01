@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
 
+        // Initialize buttons
         logoutButton = findViewById(R.id.logoutButton);
         manageGoalsButton = findViewById(R.id.manageGoalsButton);
         feedbackButton = findViewById(R.id.feedbackButton);
@@ -35,6 +36,11 @@ public class MainActivity extends Activity {
             startActivity(intent);
         });
 
+        // Navigate to FeedbackActivity
+        feedbackButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, FeedbackActivity.class);
+            startActivity(intent);
+        });
 
 
 
