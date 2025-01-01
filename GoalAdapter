@@ -1,0 +1,67 @@
+package com.example.myapplication;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
+
+public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder> {
+
+    private final List<Goal> goals;
+    private final OnGoalActionListener actionListener;
+
+    public GoalAdapter(List<Goal> goals, OnGoalActionListener actionListener) {
+        this.goals = goals;
+        this.actionListener = actionListener;
+    }
+
+    @NonNull
+    @Override
+    public GoalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_goal, parent, false);
+        return new GoalViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull GoalViewHolder holder, int position) {
+        Goal goal = goals.get(position);
+
+        holder.title.setText(goal.getTitle());
+        holder.description.setText(goal.getDescription());
+        holder.date.setText(goal.getDate());
+
+        holder.editButton.setOnClickListener(v -> actionListener.onEdit(goal));
+        holder.deleteButton.setOnClickListener(v -> actionListener.onDelete(goal));
+    }
+
+    @Override
+    public int getItemCount() {
+        return goals.size();
+    }
+
+    static class GoalViewHolder extends RecyclerView.ViewHolder {
+        TextView title, description, date;
+        Button editButton, deleteButton;
+
+        GoalViewHolder(View itemView) {
+            super(itemView);
+            title = itemView.findViewById(R.id.goalTitle);
+            description = itemView.findViewById(R.id.goalDescription);
+            date = itemView.findViewById(R.id.goalDate);
+            editButton = itemView.findViewById(R.id.editGoalButton);
+            deleteButton = itemView.findViewById(R.id.deleteGoalButton);
+        }
+    }
+
+    public interface OnGoalActionListener {
+        void onEdit(Goal goal);
+
+        void onDelete(Goal goal);
+    }
+}
