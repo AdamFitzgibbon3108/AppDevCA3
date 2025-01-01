@@ -1,0 +1,65 @@
+package com.example.myapplication;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+public class MainActivity extends Activity {
+
+    private FirebaseAuth mAuth;
+    private Button logoutButton;
+    private TextView emailView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        mAuth = FirebaseAuth.getInstance();
+        logoutButton = findViewById(R.id.logoutButton);
+        emailView = findViewById(R.id.emailView);
+
+        // Fetch and display the user's email
+        fetchUserEmail();
+
+        // Logout button functionality
+        logoutButton.setOnClickListener(v -> {
+            mAuth.signOut();
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            finish();
+        });
+    }
+
+    private void fetchUserEmail() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            DatabaseReference userRef = FirebaseDatabase.getInstance()
+                    .getReference("users")
+                    .child(user.getUid());
+
+            userRef.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    DataSnapshot snapshot = task.getResult();
+                    if (snapshot.exists()) {
+                        String email = snapshot.child("email").getValue(String.class);
+                        emailView.setText("Email: " + email); // Display email in the TextView
+                    } else {
+                        Log.d("Firebase", "No data found for user.");
+                        emailView.setText("No email found.");
+                    }
+                } else {
+                    Log.e("Firebase", "Failed to fetch email: " + task.getException().getMessage());
+                }
+            });
+        }
+    }
+}
