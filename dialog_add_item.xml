@@ -1,32 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#F5F5F5">
 
-    <!-- Title Input Field -->
-    <EditText
-        android:id="@+id/goalTitleField"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Goal Title"
-        android:inputType="text" />
+        android:orientation="vertical">
 
-    <!-- Description Input Field -->
-    <EditText
-        android:id="@+id/goalDescriptionField"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Goal Description"
-        android:inputType="text" />
+        <!-- Goal Title Input Field -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Goal Title"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="#333333" />
 
-    <!-- Date Input Field -->
-    <EditText
-        android:id="@+id/goalDateField"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Goal Date (e.g. YYYY-MM-DD)"
-        android:inputType="date" />
+        <EditText
+            android:id="@+id/goalTitleField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Goal Title"
+            android:inputType="text"
+            android:background="#FFFFFF"
+            android:padding="12dp"
+            android:elevation="2dp"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_marginBottom="16dp" />
 
-</LinearLayout>
+        <!-- Goal Description Input Field -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Goal Description"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="#333333" />
+
+        <EditText
+            android:id="@+id/goalDescriptionField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Goal Description"
+            android:inputType="textMultiLine"
+            android:minHeight="80dp"
+            android:background="#FFFFFF"
+            android:padding="12dp"
+            android:elevation="2dp"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Goal Date Input Field -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Goal Date"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="#333333" />
+
+        <EditText
+            android:id="@+id/goalDateField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Goal Date (e.g. YYYY-MM-DD)"
+            android:inputType="date"
+            android:background="#FFFFFF"
+            android:padding="12dp"
+            android:elevation="2dp"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_marginBottom="16dp" />
+    </LinearLayout>
+</ScrollView>
