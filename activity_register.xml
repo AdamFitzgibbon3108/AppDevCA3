@@ -2,87 +2,80 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="16dp"
     android:background="#F5F5F5">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:orientation="vertical">
 
-        <!-- Title -->
+        <!-- Goal Title Input Field -->
         <TextView
-            android:id="@+id/registerTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create an Account"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#000000"
-            android:gravity="center"
-            android:layout_marginBottom="24dp" />
+            android:text="Goal Title"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="#333333" />
 
-        <!-- Email Input Field -->
         <EditText
-            android:id="@+id/emailField"
+            android:id="@+id/goalTitleField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Email"
-            android:inputType="textEmailAddress"
-            android:background="@android:drawable/edit_text"
+            android:hint="Enter Goal Title"
+            android:inputType="text"
+            android:background="#FFFFFF"
             android:padding="12dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="8dp" />
+            android:elevation="2dp"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_marginBottom="16dp" />
 
-        <!-- Password Input with Toggle -->
-        <LinearLayout
+        <!-- Goal Description Input Field -->
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="16dp"
-            android:gravity="center">
+            android:text="Goal Description"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="#333333" />
 
-            <EditText
-                android:id="@+id/passwordField"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Enter Password"
-                android:inputType="textPassword"
-                android:background="@android:drawable/edit_text"
-                android:padding="12dp"
-                android:layout_marginEnd="8dp" />
-
-            <Button
-                android:id="@+id/togglePasswordVisibility"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Show"
-                android:background="@android:drawable/btn_default"
-                android:padding="12dp" />
-        </LinearLayout>
-
-        <!-- Register Button -->
-        <Button
-            android:id="@+id/registerButton"
+        <EditText
+            android:id="@+id/goalDescriptionField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Register"
-            android:backgroundTint="#2196F3"
-            android:textColor="#FFFFFF"
-            android:layout_marginBottom="16dp"
+            android:hint="Enter Goal Description"
+            android:inputType="textMultiLine"
+            android:minHeight="80dp"
+            android:background="#FFFFFF"
             android:padding="12dp"
-            android:enabled="false" />
+            android:elevation="2dp"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_marginBottom="16dp" />
 
-        <!-- Progress Bar -->
-        <ProgressBar
-            android:id="@+id/registerProgressBar"
-            android:layout_width="wrap_content"
+        <!-- Goal Date Input Field -->
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp" />
+            android:text="Goal Date"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:textColor="#333333" />
+
+        <EditText
+            android:id="@+id/goalDateField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Goal Date (e.g. YYYY-MM-DD)"
+            android:inputType="date"
+            android:background="#FFFFFF"
+            android:padding="12dp"
+            android:elevation="2dp"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_marginBottom="16dp" />
     </LinearLayout>
 </ScrollView>
