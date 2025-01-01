@@ -1,0 +1,83 @@
+package com.example.myapplication;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+public class FeedbackActivity extends Activity {
+
+    private EditText feedbackField;
+    private Button submitFeedbackButton, backToMainButton;
+    private DatabaseReference userFeedbackRef;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_feedback);
+
+        // Initialize UI elements
+        feedbackField = findViewById(R.id.feedbackField);
+        submitFeedbackButton = findViewById(R.id.submitFeedbackButton);
+        backToMainButton = findViewById(R.id.backToMainButton);
+
+        // Get the logged-in user
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Reference to the user's feedback in Firebase
+            DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+            userFeedbackRef = usersRef.child(user.getUid()).child("feedback");
+        } else {
+            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Handle feedback submission
+        submitFeedbackButton.setOnClickListener(v -> submitFeedback());
+
+        // Navigate back to MainActivity
+        backToMainButton.setOnClickListener(v -> finish());
+    }
+
+    private void submitFeedback() {
+        String feedbackMessage = feedbackField.getText().toString().trim();
+
+        if (TextUtils.isEmpty(feedbackMessage)) {
+            Toast.makeText(this, "Please enter feedback", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Generate a timestamp
+        String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+
+        // Generate a unique ID for feedback
+        String feedbackId = userFeedbackRef.push().getKey();
+
+        if (feedbackId != null) {
+            // Create feedback object
+            Feedback feedback = new Feedback(feedbackId, feedbackMessage, timestamp);
+
+            // Save feedback to Firebase
+            userFeedbackRef.child(feedbackId).setValue(feedback).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(this, "Feedback submitted successfully", Toast.LENGTH_SHORT).show();
+                    feedbackField.setText(""); // Clear the field
+                } else {
+                    Toast.makeText(this, "Failed to submit feedback", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+    }
+}
+
