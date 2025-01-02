@@ -46,6 +46,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         return newsList.size();
     }
 
+    /**
+     * Updates the data in the adapter and refreshes the RecyclerView.
+     *
+     * @param updatedList The new list of NewsItem objects.
+     */
+    public void updateData(List<NewsItem> updatedList) {
+        this.newsList = updatedList;
+        notifyDataSetChanged();
+    }
+
     public static class NewsViewHolder extends RecyclerView.ViewHolder {
         TextView titleTextView, descriptionTextView;
 
@@ -56,3 +66,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         }
     }
 }
+
+
+
