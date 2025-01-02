@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -49,7 +48,6 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
 
         // Initialize buttons
         logoutButton = findViewById(R.id.logoutButton);
@@ -68,6 +66,14 @@ public class MainActivity extends Activity {
 
         setupSpinners();
 
+        // Button functionalities
+        setupButtons();
+
+        // Fetch and display news
+        fetchNews();
+    }
+
+    private void setupButtons() {
         // Navigate to GoalsActivity
         manageGoalsButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, GoalsActivity.class);
@@ -86,9 +92,6 @@ public class MainActivity extends Activity {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             finish();
         });
-
-        // Fetch and display news
-        fetchNews();
     }
 
     @Override
@@ -102,14 +105,19 @@ public class MainActivity extends Activity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         // Handle menu item clicks
         int id = item.getItemId();
-        if (id == R.id.action_home) {
-            Toast.makeText(this, "Home selected", Toast.LENGTH_SHORT).show();
+        if (id == R.id.action_manage_goals) {
+            Intent manageGoalsIntent = new Intent(this, GoalsActivity.class);
+            startActivity(manageGoalsIntent);
             return true;
-        } else if (id == R.id.action_profile) {
-            Toast.makeText(this, "Profile selected", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.action_feedback) {
+            Intent feedbackIntent = new Intent(this, FeedbackActivity.class);
+            startActivity(feedbackIntent);
             return true;
-        } else if (id == R.id.action_settings) {
-            Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.action_logout) {
+            mAuth.signOut();
+            Intent logoutIntent = new Intent(this, LoginActivity.class);
+            startActivity(logoutIntent);
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -125,10 +133,8 @@ public class MainActivity extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, android.view.View view, int position, long id) {
                 if (position == 0) {
-                    // Sort by Date
                     Collections.sort(newsList, Comparator.comparing(NewsItem::getDate));
                 } else if (position == 1) {
-                    // Sort by Title
                     Collections.sort(newsList, Comparator.comparing(NewsItem::getTitle));
                 }
                 newsAdapter.updateData(newsList);
@@ -152,31 +158,26 @@ public class MainActivity extends Activity {
                 if (!selectedContinent.equals("All Continents")) {
                     List<NewsItem> filteredList = new ArrayList<>();
                     for (NewsItem item : newsList) {
-                        // Compare region case-insensitively
                         if (item.getRegion().equalsIgnoreCase(selectedContinent)) {
                             filteredList.add(item);
                         }
                     }
 
-                    // Check if filtered list has items
                     if (!filteredList.isEmpty()) {
-                        newsAdapter.updateData(filteredList); // Update adapter with filtered data
+                        newsAdapter.updateData(filteredList);
                     } else {
-                        newsAdapter.updateData(new ArrayList<>()); // Show empty RecyclerView
+                        newsAdapter.updateData(new ArrayList<>());
                         Log.d("MainActivity", "No news items found for the selected continent.");
                     }
                 } else {
-                    // Reset to show all items
                     newsAdapter.updateData(newsList);
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // No action needed
             }
         });
-
     }
 
     private void fetchNews() {
@@ -205,7 +206,7 @@ public class MainActivity extends Activity {
     }
 
     private String determineRegion(String title) {
-        title = title.toLowerCase(); // Normalize for case-insensitive matching
+        title = title.toLowerCase();
         if (title.contains("europe")) return "Europe";
         if (title.contains("asia")) return "Asia";
         if (title.contains("africa")) return "Africa";
