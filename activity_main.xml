@@ -84,6 +84,18 @@
         android:elevation="4dp"
         android:padding="8dp" />
 
+    <Button
+        android:id="@+id/profileButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        android:backgroundTint="#03A9F4"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp" />
+
+
+
     <!-- Logout Button -->
     <Button
         android:id="@+id/logoutButton"
