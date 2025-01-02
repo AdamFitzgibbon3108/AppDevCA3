@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +21,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MainActivity extends Activity {
@@ -29,6 +34,7 @@ public class MainActivity extends Activity {
     private RecyclerView newsRecyclerView;
     private NewsAdapter newsAdapter;
     private List<NewsItem> newsList = new ArrayList<>();
+    private Spinner sortSpinner, filterSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +54,12 @@ public class MainActivity extends Activity {
         newsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         newsAdapter = new NewsAdapter(newsList, this);
         newsRecyclerView.setAdapter(newsAdapter);
+
+        // Initialize spinners
+        sortSpinner = findViewById(R.id.sortSpinner);
+        filterSpinner = findViewById(R.id.filterSpinner);
+
+        setupSpinners();
 
         // Navigate to GoalsActivity
         manageGoalsButton.setOnClickListener(v -> {
@@ -72,6 +84,55 @@ public class MainActivity extends Activity {
         fetchNews();
     }
 
+    private void setupSpinners() {
+        // Sort options
+        ArrayAdapter<String> sortAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"Sort by Date"});
+        sortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sortSpinner.setAdapter(sortAdapter);
+
+        sortSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, android.view.View view, int position, long id) {
+                if (position == 0) {
+                    // Sort by Date
+                    Collections.sort(newsList, Comparator.comparing(NewsItem::getDate));
+                    newsAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        // Filter options
+        ArrayAdapter<String> filterAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"All Continents", "Africa", "Asia", "Europe", "North America", "South America", "Oceania"});
+        filterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        filterSpinner.setAdapter(filterAdapter);
+
+        filterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, android.view.View view, int position, long id) {
+                String selectedContinent = (String) parent.getItemAtPosition(position);
+                if (!selectedContinent.equals("All Continents")) {
+                    List<NewsItem> filteredList = new ArrayList<>();
+                    for (NewsItem item : newsList) {
+                        if (item.getRegion().equalsIgnoreCase(selectedContinent)) {
+                            filteredList.add(item);
+                        }
+                    }
+                    newsAdapter.updateData(filteredList);
+                } else {
+                    newsAdapter.updateData(newsList);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+    }
+
     private void fetchNews() {
         new Thread(() -> {
             try {
@@ -82,8 +143,10 @@ public class MainActivity extends Activity {
                     String title = item.selectFirst("title").text();
                     String description = item.selectFirst("description").text();
                     String link = item.selectFirst("link").text();
+                    String region = determineRegion(title); // Placeholder logic for determining region
+                    String date = item.selectFirst("pubDate").text(); // Fetch publication date
 
-                    newsList.add(new NewsItem(title, description, link));
+                    newsList.add(new NewsItem(title, description, link, region, date));
                 }
 
                 runOnUiThread(() -> newsAdapter.notifyDataSetChanged());
@@ -91,5 +154,17 @@ public class MainActivity extends Activity {
                 Log.e("MainActivity", "Error fetching news", e);
             }
         }).start();
+    }
+
+    private String determineRegion(String title) {
+        // Placeholder for actual logic to determine region from the title or content
+        // For example:
+        if (title.contains("Europe")) return "Europe";
+        if (title.contains("Asia")) return "Asia";
+        if (title.contains("Africa")) return "Africa";
+        if (title.contains("North America")) return "North America";
+        if (title.contains("South America")) return "South America";
+        if (title.contains("Oceania")) return "Oceania";
+        return "Unknown";
     }
 }
