@@ -13,13 +13,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.app.AlertDialog;
 import android.widget.TextView;
-import com.google.firebase.auth.FirebaseUser;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -40,6 +40,7 @@ public class MainActivity extends Activity {
     private Button logoutButton;
     private Button manageGoalsButton;
     private Button feedbackButton;
+    private Button profileButton; // Added profile button
     private RecyclerView newsRecyclerView;
     private NewsAdapter newsAdapter;
     private List<NewsItem> newsList = new ArrayList<>();
@@ -60,11 +61,11 @@ public class MainActivity extends Activity {
             welcomeMessage.setText("Welcome, " + (email != null ? email : "User") + "!");
         }
 
-
         // Initialize buttons
         logoutButton = findViewById(R.id.logoutButton);
         manageGoalsButton = findViewById(R.id.manageGoalsButton);
         feedbackButton = findViewById(R.id.feedbackButton);
+        profileButton = findViewById(R.id.profileButton); // Initialize the profile button
 
         // Initialize RecyclerView for news
         newsRecyclerView = findViewById(R.id.newsRecyclerView);
@@ -77,11 +78,7 @@ public class MainActivity extends Activity {
         filterSpinner = findViewById(R.id.filterSpinner);
 
         setupSpinners();
-
-        // Button functionalities
         setupButtons();
-
-        // Fetch and display news
         fetchNews();
     }
 
@@ -95,6 +92,12 @@ public class MainActivity extends Activity {
         // Navigate to FeedbackActivity
         feedbackButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, FeedbackActivity.class);
+            startActivity(intent);
+        });
+
+        // Navigate to ProfileActivity
+        profileButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
             startActivity(intent);
         });
 
@@ -131,6 +134,10 @@ public class MainActivity extends Activity {
         } else if (id == R.id.action_feedback) {
             Intent feedbackIntent = new Intent(this, FeedbackActivity.class);
             startActivity(feedbackIntent);
+            return true;
+        } else if (id == R.id.action_profile) {
+            Intent profileIntent = new Intent(this, ProfileActivity.class);
+            startActivity(profileIntent);
             return true;
         } else if (id == R.id.action_logout) {
             mAuth.signOut();
