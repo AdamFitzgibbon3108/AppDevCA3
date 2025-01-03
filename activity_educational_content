@@ -1,0 +1,188 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/educationalContentRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#F5F5F5">
+
+    <!-- Back Button -->
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:backgroundTint="#03A9F4"
+        android:textColor="#FFFFFF"
+        android:padding="12dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Scrollable Content -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/backButton"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="#FFFFFF"
+            android:elevation="4dp"
+            android:layout_marginTop="16dp">
+
+            <!-- Title -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Comprehensive Cybersecurity Guide"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="16dp"
+                android:textColor="#000000" />
+
+            <!-- Section: Password Security -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Password Security"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"
+                android:textColor="#03A9F4" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Use strong, unique passwords for every account."
+                android:textSize="16sp"
+                android:layout_marginBottom="4dp"
+                android:textColor="#000000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Enable two-factor authentication (2FA) wherever possible."
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:textColor="#000000" />
+
+            <!-- Section: Phishing Awareness -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Phishing Awareness"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"
+                android:textColor="#03A9F4" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Always verify email senders before clicking on links."
+                android:textSize="16sp"
+                android:layout_marginBottom="4dp"
+                android:textColor="#000000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Avoid downloading attachments from untrusted sources."
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:textColor="#000000" />
+
+            <!-- Section: Software Updates -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Software Updates"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"
+                android:textColor="#03A9F4" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Regularly update all your software and devices."
+                android:textSize="16sp"
+                android:layout_marginBottom="4dp"
+                android:textColor="#000000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Use automatic updates to ensure timely security patches."
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:textColor="#000000" />
+
+            <!-- Section: Safe Internet Practices -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Safe Internet Practices"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"
+                android:textColor="#03A9F4" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Use a secure, private Wi-Fi connection whenever possible."
+                android:textSize="16sp"
+                android:layout_marginBottom="4dp"
+                android:textColor="#000000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Avoid sharing sensitive information on public Wi-Fi."
+                android:textSize="16sp"
+                android:layout_marginBottom="4dp"
+                android:textColor="#000000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Use a VPN when accessing untrusted networks."
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:textColor="#000000" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Theme Toggle Button -->
+    <Button
+        android:id="@+id/themeToggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Toggle Theme"
+        android:backgroundTint="#FF9800"
+        android:textColor="#FFFFFF"
+        android:padding="12dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/scrollView" />
+
+    <!-- More Info Button -->
+    <Button
+        android:id="@+id/moreInfoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="More Info"
+        android:backgroundTint="#4CAF50"
+        android:textColor="#FFFFFF"
+        android:padding="12dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/scrollView"
+        android:layout_marginTop="16dp" />
+</RelativeLayout>
+
