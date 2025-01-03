@@ -1,0 +1,51 @@
+package com.example.myapplication;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Button;
+
+public class EducationalContentActivity extends Activity {
+    private boolean isDarkTheme = false;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_educational_content);
+
+        // Back Button
+        Button backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(EducationalContentActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+        // Theme Toggle Button
+        Button themeToggleButton = findViewById(R.id.themeToggleButton);
+        themeToggleButton.setOnClickListener(v -> toggleTheme());
+
+        // More Info Button
+        Button moreInfoButton = findViewById(R.id.moreInfoButton);
+        moreInfoButton.setOnClickListener(v -> showMoreInfoDialog());
+    }
+
+    private void toggleTheme() {
+        isDarkTheme = !isDarkTheme;
+        int backgroundColor = isDarkTheme ? android.R.color.black : android.R.color.white;
+        findViewById(R.id.educationalContentRoot).setBackgroundColor(getResources().getColor(backgroundColor));
+    }
+
+    private void showMoreInfoDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("More Information");
+        builder.setMessage("For more detailed cybersecurity resources, consider visiting trusted online sources, blogs, and official documentation.");
+        builder.setPositiveButton("Close", (dialog, which) -> dialog.dismiss());
+        builder.show();
+    }
+}
+
+
+
+
