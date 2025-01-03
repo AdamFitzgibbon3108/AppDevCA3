@@ -101,6 +101,14 @@ public class MainActivity extends Activity {
             startActivity(intent);
         });
 
+        // Inside setupButtons() or onCreate()
+        Button educationalContentButton = findViewById(R.id.educationalContentButton);
+        educationalContentButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, EducationalContentActivity.class);
+            startActivity(intent);
+        });
+
+
         // Logout button functionality
         logoutButton.setOnClickListener(v -> {
             new AlertDialog.Builder(this)
@@ -242,5 +250,3 @@ public class MainActivity extends Activity {
         return "Unknown";
     }
 }
-
-
